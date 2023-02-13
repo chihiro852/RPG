@@ -3,11 +3,20 @@ package com.example.demo;
 public class Part01 {
 
 	static String name = "アーサー";
-	static int lv = 50;
+	static int lv = 30;
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws java.io.IOException {
 
 		putJosyou();
+		
+		System.out.println( "1、すぐに魔王を倒しに行く" );
+		System.out.println( "2、修行してから倒しに行く" );
+		
+		int c = System.in.read();
+		
+		if( c == '2' ) {
+			lv = 100;
+		}
 		
 		if(lv < 40) {
 			putGameOver();
@@ -17,6 +26,7 @@ public class Part01 {
 
 	}
 
+	// 序章
 	static void putJosyou() {
 		System.out.println("魔王が世界を滅ぼ そうとしています。");
 		System.out.println(name +  "はレベル" + lv + "のツワモノです。");
