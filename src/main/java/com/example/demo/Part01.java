@@ -23,21 +23,23 @@ public class Part01 {
 		System.out.println( "1、魔王を倒しに行く" );
 		System.out.println( "2、修行する" );
 		
-		inputCommand();
-	}
-	
-	public static void inputCommand() throws java.io.IOException {
-		int c = System.in.read();
-
+		int c = inputCommand();
 		if( c == '1' ) {
 			System.out.println( "魔王が現れた" );
 		} else if( c == '2' ) {
 			lv = lv + 5;
 			System.out.println( "レベルが" + lv + "になった" );
 			putCommand();
-		} else {
-			inputCommand();
 		}
+	}
+	
+	public static int inputCommand() throws java.io.IOException {
+		int c = System.in.read();
+		
+		if( c == 10 || c == 13) {
+			return( inputCommand() );
+		}
+		return( c );
 
 	}
 
