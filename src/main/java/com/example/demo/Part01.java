@@ -9,19 +9,34 @@ public class Part01 {
 
 		putJosyou();
 		
-		System.out.println( "1、すぐに魔王を倒しに行く" );
-		System.out.println( "2、修行してから倒しに行く" );
-		
-		int c = System.in.read();
-		
-		if( c == '2' ) {
-			lv = 100;
-		}
+		putCommand();
 		
 		if(lv < 40) {
 			putGameOver();
 		} else {
 			putGameClear();
+		}
+
+	}
+	
+	public static void putCommand() throws java.io.IOException {
+		System.out.println( "1、魔王を倒しに行く" );
+		System.out.println( "2、修行する" );
+		
+		inputCommand();
+	}
+	
+	public static void inputCommand() throws java.io.IOException {
+		int c = System.in.read();
+
+		if( c == '1' ) {
+			System.out.println( "魔王が現れた" );
+		} else if( c == '2' ) {
+			lv = lv + 5;
+			System.out.println( "レベルが" + lv + "になった" );
+			putCommand();
+		} else {
+			inputCommand();
 		}
 
 	}
