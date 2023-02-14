@@ -35,6 +35,9 @@ public class Part01 {
 		} else if( c == '2' ) { // 修行する
 			lv = lv + 5;
 			hp = hp - 2;
+			if( hp < 0 ) {
+				hp = 0;
+			}
 			System.out.println( "レベルが" + lv + "になった" );
 			System.out.println( "HPが" + hp + "になった" );
 
@@ -45,6 +48,7 @@ public class Part01 {
 			}
 		} else if( c == '3' ) { // 宿屋に泊まる
 			hp = hp + 10;
+			System.out.println( "HPが" + hp + "になった" );
 			putCommand();
 		}
 	}
