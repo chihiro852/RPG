@@ -5,6 +5,7 @@ public class Part01 {
 	static String name = "アーサー";
 	static int lv = 30;
 
+	// ブランチ切り替え
 	public static void main(String[] args) throws java.io.IOException {
 
 		putJosyou();
