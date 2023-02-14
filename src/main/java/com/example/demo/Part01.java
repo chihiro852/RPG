@@ -2,15 +2,19 @@ package com.example.demo;
 
 public class Part01 {
 
-	static String name = "アーサー";
-	static int lv = 30;
+	static String name = "アーサー"; // player
+	static int lv = 1; // level
+	static int hp = 10; // hit point
 
-	// ブランチ切り替え
 	public static void main(String[] args) throws java.io.IOException {
 
-		putJosyou();
+		putJosyou(); // 序章を表示
 		
-		putCommand();
+		putCommand(); // コマンドを表示
+
+		if( hp <= 0 ) {
+			return;
+		}
 		
 		if(lv < 40) {
 			putGameOver();
@@ -23,13 +27,24 @@ public class Part01 {
 	public static void putCommand() throws java.io.IOException {
 		System.out.println( "1、魔王を倒しに行く" );
 		System.out.println( "2、修行する" );
+		System.out.println( "3、宿屋に泊まる" );
 		
 		int c = inputCommand();
-		if( c == '1' ) {
+		if( c == '1' ) { // 魔王と闘う
 			System.out.println( "魔王が現れた" );
-		} else if( c == '2' ) {
+		} else if( c == '2' ) { // 修行する
 			lv = lv + 5;
+			hp = hp - 2;
 			System.out.println( "レベルが" + lv + "になった" );
+			System.out.println( "HPが" + hp + "になった" );
+
+			if( hp <= 0) {
+				System.out.println("GAME OVER");
+			} else {
+				putCommand();
+			}
+		} else if( c == '3' ) { // 宿屋に泊まる
+			hp = hp + 10;
 			putCommand();
 		}
 	}
@@ -47,7 +62,7 @@ public class Part01 {
 	// 序章
 	static void putJosyou() {
 		System.out.println("魔王が世界を滅ぼ そうとしています。");
-		System.out.println(name +  "はレベル" + lv + "のツワモノです。");
+		System.out.println(name +  "はレベル：" + lv + "、HP：" + hp + "です。");
 	}
 
 	static void putGameOver() {
