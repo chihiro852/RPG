@@ -2,9 +2,10 @@ package com.example.demo;
 
 public class Part01 {
 
-	static String name = "アーサー"; // player
-	static int lv = 1; // level
-	static int hp = 10; // hit point
+	static String name = "アーサー";	// player name
+	static int lv = 1;					// level
+	static int hp = 10;					// hit point
+	static int gold = 100;				// 所持金
 
 	public static void main(String[] args) throws java.io.IOException {
 
@@ -39,16 +40,21 @@ public class Part01 {
 				hp = 0;
 			}
 			System.out.println( "レベルが" + lv + "になった" );
-			System.out.println( "HPが" + hp + "になった" );
+			putStatus();
 
 			if( hp <= 0) {
+				System.out.println( "HPが0になった" );
 				System.out.println("GAME OVER");
 			} else {
 				putCommand();
 			}
 		} else if( c == '3' ) { // 宿屋に泊まる
-			hp = hp + 10;
-			System.out.println( "HPが" + hp + "になった" );
+			if( gold >= 11 ) {
+				hp = hp + 10;
+				gold = gold - 10;
+			}
+			
+			putStatus();
 			putCommand();
 		}
 	}
@@ -64,9 +70,15 @@ public class Part01 {
 	}
 
 	// 序章
-	static void putJosyou() {
+	public static void putJosyou() {
 		System.out.println("魔王が世界を滅ぼ そうとしています。");
-		System.out.println(name +  "はレベル：" + lv + "、HP：" + hp + "です。");
+		putStatus();
+	}
+	
+	public static void putStatus() {
+		System.out.println( "----------------------------------------" );
+		System.out.println( "　" + name +  "　Lv：" + lv + "　HP：" + hp + "　所持金：" + gold + "G");
+		System.out.println( "----------------------------------------" );
 	}
 
 	static void putGameOver() {
