@@ -29,21 +29,26 @@ public class Part01 {
 		put( "1、魔王を倒しに行く" );
 		put( "2、修行する" );
 		put( "3、宿屋に泊まる" );
-		
-		int c = inputCommand();
-		if( c == '1' ) { 			// 魔王と闘う
-			put( "魔王が現れた" );
-		} else if( c == '2' ) { 	// 修行する
-			syugyou();
-		} else if( c == '3' ) { 	// 宿屋に泊まる
-			if( gold >= 11 ) {
-				hp = hp + 10;
-				gold = gold - 10;
+
+		switch( inputCommand() ) {
+			case '1':{ // 魔王と闘う
+				put( "魔王が現れた" );
+				break;
 			}
-			
-			putStatus();
-			
-			putCommand();
+			case '2':{ // 修行する
+				syugyou();
+				break;
+			}
+			case '3':{ // 宿屋に泊まる
+				if( gold >= 11 ) {
+					hp = hp + 10;
+					gold = gold - 10;
+				}
+				
+				putStatus();
+				
+				putCommand();
+			}
 		}
 	}
 	
@@ -55,6 +60,21 @@ public class Part01 {
 		java.util.Random r = new java.util.Random();
 		int e = r.nextInt( 3 ) + 1;
 		put( "敵が" + e + "匹現れた！" );
+		
+		switch( e ) {
+			case 1:{
+				put( "●" );
+				break;
+			}
+			case 2:{
+				put( "●●" );
+				break;
+			}
+			case 3:{
+				put( "●●●" );
+				break;
+			}
+		}
 		
 		
 		// damage
