@@ -5,13 +5,13 @@ public class Part01 {
 	static String name = "ヨシヒコ";	// player name
 	static int lv = 1;					// level
 	static int hp = 10;					// hit point
-	static int gold = 100;				// 所持金
+	static long gold = 100;				// 所持金
 
 	public static void main(String[] args) throws java.io.IOException {
 
-		putJosyou(); // 序章を表示
+		putJosyou(); 	// 序章を表示
 		
-		putCommand(); // コマンドを表示
+		putCommand(); 	// コマンドを表示
 
 		if( hp <= 0 ) {
 			return;
@@ -31,14 +31,17 @@ public class Part01 {
 		System.out.println( "3、宿屋に泊まる" );
 		
 		int c = inputCommand();
-		if( c == '1' ) { // 魔王と闘う
+		if( c == '1' ) { 			// 魔王と闘う
 			System.out.println( "魔王が現れた" );
-		} else if( c == '2' ) { // 修行する
+		} else if( c == '2' ) { 	// 修行する
+			java.util.Random r = new java.util.Random();
+			int d = r.nextInt( 8 );
 			lv = lv + 5;
-			hp = hp - 2;
+			hp = hp - d;
 			if( hp < 0 ) {
 				hp = 0;
 			}
+			System.out.println( name + "は、" + d + "ポイントのダメージをうけた！" );
 			System.out.println( "レベルが" + lv + "になった" );
 			putStatus();
 
@@ -48,13 +51,14 @@ public class Part01 {
 			} else {
 				putCommand();
 			}
-		} else if( c == '3' ) { // 宿屋に泊まる
+		} else if( c == '3' ) { 	// 宿屋に泊まる
 			if( gold >= 11 ) {
 				hp = hp + 10;
 				gold = gold - 10;
 			}
 			
 			putStatus();
+			
 			putCommand();
 		}
 	}
@@ -81,11 +85,13 @@ public class Part01 {
 		System.out.println( "----------------------------------------" );
 	}
 
+	// GAME OVER
 	static void putGameOver() {
 		System.out.println(name + "は魔王に敗れました");
 		System.out.println("GAME OVER");
 	}
 
+	// GAME CLEAR
 	static void putGameClear() {
 		String clear = name + "は魔王を倒しました。";
 		put(clear);
