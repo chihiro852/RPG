@@ -51,8 +51,13 @@ public class Part01 {
 	 * 修行コマンド
 	 */
 	public static void syugyou() throws java.io.IOException {
-		// damage
+		// 摘出減数
 		java.util.Random r = new java.util.Random();
+		int e = r.nextInt( 3 ) + 1;
+		put( "敵が" + e + "匹現れた！" );
+		
+		
+		// damage
 		int d = r.nextInt( 8 );
 		hp = hp - d;
 		if( hp < 0 ) {
