@@ -26,31 +26,15 @@ public class Part01 {
 	}
 	
 	public static void putCommand() throws java.io.IOException {
-		System.out.println( "1、魔王を倒しに行く" );
-		System.out.println( "2、修行する" );
-		System.out.println( "3、宿屋に泊まる" );
+		put( "1、魔王を倒しに行く" );
+		put( "2、修行する" );
+		put( "3、宿屋に泊まる" );
 		
 		int c = inputCommand();
 		if( c == '1' ) { 			// 魔王と闘う
-			System.out.println( "魔王が現れた" );
+			put( "魔王が現れた" );
 		} else if( c == '2' ) { 	// 修行する
-			java.util.Random r = new java.util.Random();
-			int d = r.nextInt( 8 );
-			lv = lv + 5;
-			hp = hp - d;
-			if( hp < 0 ) {
-				hp = 0;
-			}
-			System.out.println( name + "は、" + d + "ポイントのダメージをうけた！" );
-			System.out.println( "レベルが" + lv + "になった" );
-			putStatus();
-
-			if( hp <= 0) {
-				System.out.println( "HPが0になった" );
-				System.out.println("GAME OVER");
-			} else {
-				putCommand();
-			}
+			syugyou();
 		} else if( c == '3' ) { 	// 宿屋に泊まる
 			if( gold >= 11 ) {
 				hp = hp + 10;
@@ -63,6 +47,36 @@ public class Part01 {
 		}
 	}
 	
+	/*
+	 * 修行コマンド
+	 */
+	public static void syugyou() throws java.io.IOException {
+		// damage
+		java.util.Random r = new java.util.Random();
+		int d = r.nextInt( 8 );
+		hp = hp - d;
+		if( hp < 0 ) {
+			hp = 0;
+		}
+		put( name + "は、" + d + "ポイントのダメージをうけた！" );
+		
+		// level
+		int l = r.nextInt( 3 );
+		lv = lv + l;
+		put( "レベルが" + lv + "になった" );
+		
+		putStatus();
+		if( hp <= 0) {
+			put( "HPが0になった" );
+			put("GAME OVER");
+		} else {
+			putCommand();
+		}
+	}
+	
+	/*
+	 * 
+	 */
 	public static int inputCommand() throws java.io.IOException {
 		int c = System.in.read();
 		
@@ -73,25 +87,34 @@ public class Part01 {
 
 	}
 
-	// 序章
+	/*
+	 * 序章
+	 */
 	public static void putJosyou() {
-		System.out.println("魔王が世界を滅ぼ そうとしています。");
+		put("魔王が世界を滅ぼ そうとしています。");
 		putStatus();
 	}
 	
+	/*
+	 * ステータス表示
+	 */
 	public static void putStatus() {
-		System.out.println( "----------------------------------------" );
-		System.out.println( "　" + name +  "　Lv：" + lv + "　HP：" + hp + "　所持金：" + gold + "G");
-		System.out.println( "----------------------------------------" );
+		put( "----------------------------------------" );
+		put( "　" + name +  "　Lv：" + lv + "　HP：" + hp + "　所持金：" + gold + "G");
+		put( "----------------------------------------" );
 	}
 
-	// GAME OVER
+	/*
+	 * GAME OVER
+	 */
 	static void putGameOver() {
-		System.out.println(name + "は魔王に敗れました");
-		System.out.println("GAME OVER");
+		put(name + "は魔王に敗れました");
+		put("GAME OVER");
 	}
-
-	// GAME CLEAR
+ 
+	/*
+	 * GAME CLEAR
+	 */
 	static void putGameClear() {
 		String clear = name + "は魔王を倒しました。";
 		put(clear);
@@ -111,6 +134,9 @@ public class Part01 {
 		put("GAME CLEAR!");
 	}
 
+	/*
+	 * 文字表示
+	 */
 	static void put( String str ) {
 		System.out.println(str);
 	}
