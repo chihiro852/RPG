@@ -2,7 +2,7 @@ package com.example.demo;
 
 public class Part01 {
 
-	static String name = "アーサー";	// player name
+	static String name = "ヨシヒコ";	// player name
 	static int lv = 1;					// level
 	static int hp = 10;					// hit point
 	static int gold = 100;				// 所持金
