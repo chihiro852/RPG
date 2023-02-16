@@ -9,7 +9,7 @@ public class Part01 {
 
 	public static void main(String[] args) throws java.io.IOException {
 
-		putJosyou(); 	// 序章を表示
+		Console.putJosyou(); 	// 序章を表示
 		
 		putCommand(); 	// コマンドを表示
 
@@ -18,21 +18,21 @@ public class Part01 {
 		}
 		
 		if(lv < 40) {
-			putGameOver();
+			Console.putGameOver();
 		} else {
-			putGameClear();
+			Console.putGameClear();
 		}
 
 	}
 	
 	public static void putCommand() throws java.io.IOException {
-		put( "1、魔王を倒しに行く" );
-		put( "2、修行する" );
-		put( "3、宿屋に泊まる" );
+		Console.character( "1、魔王を倒しに行く" );
+		Console.character( "2、修行する" );
+		Console.character( "3、宿屋に泊まる" );
 
 		switch( inputCommand() ) {
 			case '1':{ // 魔王と闘う
-				put( "魔王が現れた" );
+				Console.character( "魔王が現れた" );
 				break;
 			}
 			case '2':{ // 修行する
@@ -45,7 +45,7 @@ public class Part01 {
 					gold = gold - 10;
 				}
 				
-				putStatus();
+				Console.putStatus();
 				
 				putCommand();
 			}
@@ -59,23 +59,16 @@ public class Part01 {
 		// 摘出減数
 		java.util.Random r = new java.util.Random();
 		int e = r.nextInt( 3 ) + 1;
-		put( "敵が" + e + "匹現れた！" );
+		Console.character( "敵が" + e + "匹現れた！" );
 		
-		switch( e ) {
-			case 1:{
-				put( "●" );
-				break;
-			}
-			case 2:{
-				put( "●●" );
-				break;
-			}
-			case 3:{
-				put( "●●●" );
-				break;
-			}
+		String m = "●";
+		String s = "";
+		
+		for( int i = 0; i < e; i = i + 1) {
+			s = s + m;
 		}
 		
+		Console.character( s );
 		
 		// damage
 		int d = r.nextInt( 8 );
@@ -83,17 +76,17 @@ public class Part01 {
 		if( hp < 0 ) {
 			hp = 0;
 		}
-		put( name + "は、" + d + "ポイントのダメージをうけた！" );
+		Console.character( name + "は、" + d + "ポイントのダメージをうけた！" );
 		
 		// level
 		int l = r.nextInt( 3 );
 		lv = lv + l;
-		put( "レベルが" + lv + "になった" );
+		Console.character( "レベルが" + lv + "になった" );
 		
-		putStatus();
+		Console.putStatus();
 		if( hp <= 0) {
-			put( "HPが0になった" );
-			put("GAME OVER");
+			Console.character( "HPが0になった" );
+			Console.character("GAME OVER");
 		} else {
 			putCommand();
 		}
@@ -110,59 +103,5 @@ public class Part01 {
 		}
 		return( c );
 
-	}
-
-	/*
-	 * 序章
-	 */
-	public static void putJosyou() {
-		put("魔王が世界を滅ぼ そうとしています。");
-		putStatus();
-	}
-	
-	/*
-	 * ステータス表示
-	 */
-	public static void putStatus() {
-		put( "----------------------------------------" );
-		put( "　" + name +  "　Lv：" + lv + "　HP：" + hp + "　所持金：" + gold + "G");
-		put( "----------------------------------------" );
-	}
-
-	/*
-	 * GAME OVER
-	 */
-	static void putGameOver() {
-		put(name + "は魔王に敗れました");
-		put("GAME OVER");
-	}
- 
-	/*
-	 * GAME CLEAR
-	 */
-	static void putGameClear() {
-		String clear = name + "は魔王を倒しました。";
-		put(clear);
-		
-		System.out.print("レベル" + lv);
-
-		if( lv > 100) {
-			put("なので楽勝でした");
-		} else if( lv > 80) {
-			put("なので倒せました");
-		}else if( lv > 50) {
-			put("なので苦戦しました");
-		}else{
-			put("なのでギリギリでした");
-		}
-
-		put("GAME CLEAR!");
-	}
-
-	/*
-	 * 文字表示
-	 */
-	static void put( String str ) {
-		System.out.println(str);
 	}
 }
