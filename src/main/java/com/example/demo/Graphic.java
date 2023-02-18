@@ -37,7 +37,13 @@ public class Graphic {
 		// ラベルjlを作成し、パネルjpに貼り付け
 		JLabel jlChild = new JLabel( "ヨシヒコ　Lv：1　HP：10／10" );
 		jlChild.setFont( new Font( null, 0, 30 ) );	// 文字のスタイル、サイズ(string name, int style, int size)
-		jlChild.setForeground( new Color( 0, 0, 0 ) ); // 文字の色
+		jlChild.setForeground( new Color( 255, 255, 255 ) ); // 文字の色
 		jpChild.add( jlChild );
+		
+		// 画像付きラベルを作成し、パネルjpに貼り付け
+		JLabel jlImage = new JLabel ( new javax.swing.ImageIcon( "src\\main\\resources\\hero\\brave.png" ) );
+		jlImage.setBounds( 0, 0, 96, 128 );
+		jp.add( jlImage );
+		
 	}
 }
